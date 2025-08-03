@@ -43,10 +43,6 @@ class ChatGPTClient {
 
     return response.output_text;
   }
-
-  generateListingDescription(propertyData, base64Images) {
-    return this.queryChatGPTClient(propertyData, base64Images);
-  }
 }
 
 const chatGPTClient = new ChatGPTClient();

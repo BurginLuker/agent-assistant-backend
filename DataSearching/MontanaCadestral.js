@@ -9,9 +9,13 @@ class MontanaCadastral {
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    console.log(response);
 
-    return await response.json();
+    const json = await response.json();
+    if (json.propertyId === 0) {
+      throw new Error("No Property found for Geocode");
+    }
+
+    return json;
   }
 }
 

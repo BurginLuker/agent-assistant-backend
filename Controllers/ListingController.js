@@ -10,7 +10,7 @@ class ListingController {
       .toBuffer();
   }
 
-  async generateListingDescription(geocode, images) {
+  async generateListingDescription(geocode, images, res) {
     const propertyData = await montanaCadastral.getPropertyData(geocode);
 
     const base64Images = [];
@@ -20,10 +20,7 @@ class ListingController {
       base64Images.push(base64String);
     }
 
-    // return await chatGPTClient.generateListingDescription(
-    //   propertyData,
-    //   base64Images,
-    // );
+    return await chatGPTClient.queryChatGPTClient(propertyData, base64Images);
   }
 }
 
