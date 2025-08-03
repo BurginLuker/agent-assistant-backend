@@ -1,16 +1,29 @@
-import { ChatGPTClient } from "../Model/ChatGPTClient";
-import { MontanaCadastral } from "../DataSearching/MontanaCadestral";
+import montanaCadastral from "../DataSearching/MontanaCadestral.js";
+import chatGPTClient from "../Model/ChatGPTClient.js";
+import sharp from "sharp";
+
 class ListingController {
-  CHAT_GPT_CLIENT = new ChatGPTClient();
-  MONTANA_CADASTRAL_CLIENT = new MontanaCadastral();
+  async optimizeImage(buffer) {
+    return await sharp(buffer)
+      .resize(512, 512, { fit: "inside", withoutEnlargement: true })
+      .jpeg({ quality: 80 })
+      .toBuffer();
+  }
 
   async generateListingDescription(geocode, images) {
-    const propertyData =
-      await this.MONTANA_CADASTRAL_CLIENT.getPropertyData(geocode);
-    // const description =
-    //   await this.CHAT_GPT_CLIENT.generateListingDescription(propertyData);
+    const propertyData = await montanaCadastral.getPropertyData(geocode);
 
-    return JSON.stringify(propertyData);
+    const base64Images = [];
+    for (const image of images) {
+      const optimizedBuffer = await this.optimizeImage(image.buffer);
+      const base64String = optimizedBuffer.toString("base64");
+      base64Images.push(base64String);
+    }
+
+    // return await chatGPTClient.generateListingDescription(
+    //   propertyData,
+    //   base64Images,
+    // );
   }
 }
 
