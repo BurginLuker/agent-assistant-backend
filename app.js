@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import multer from "multer";
+import { verifyToken } from "./Middleware/auth.js";
 
 const app = express();
 const port = 3000; // You can choose any available port
@@ -32,22 +33,27 @@ app.get("/", (req, res) => {
 });
 
 // Add the generate endpoint that your React app is calling
-app.post("/generate", upload.array("images", 5), async (req, res) => {
-  try {
-    const { geocode } = req.body;
-    const images = req.files || [];
+app.post(
+  "/generate",
+  verifyToken,
+  upload.array("images", 5),
+  async (req, res) => {
+    try {
+      const { geocode } = req.body;
+      const images = req.files || [];
 
-    const description = await listingController.generateListingDescription(
-      geocode,
-      images,
-    );
+      const description = await listingController.generateListingDescription(
+        geocode,
+        images,
+      );
 
-    res.send(description);
-  } catch (error) {
-    console.error("Error processing request:", error);
-    res.status(500).send("Error processing your request");
-  }
-});
+      res.send(description);
+    } catch (error) {
+      console.error("Error processing request:", error);
+      res.status(500).send(error.message);
+    }
+  },
+);
 
 app.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
