@@ -17,7 +17,7 @@ export const verifyToken = async (req, res, next) => {
   }
 
   try {
-    await admin.auth().verifyIdToken(idToken);
+    req.user = await admin.auth().verifyIdToken(idToken);
     next();
   } catch (error) {
     console.log(error);

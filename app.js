@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import multer from "multer";
 import { verifyToken } from "./Middleware/auth.js";
+import generatedListings from "./Documents/GeneratedListings.js";
 
 const app = express();
 const port = 3000; // You can choose any available port
@@ -28,8 +29,9 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.send("Hello from Express!");
+app.get("/documents", verifyToken, async (req, res) => {
+  const result = await generatedListings.getDocumentsByUserId(req.user.user_id);
+  res.status(200).json(result);
 });
 
 // Add the generate endpoint that your React app is calling
@@ -39,12 +41,15 @@ app.post(
   upload.array("images", 5),
   async (req, res) => {
     try {
+      console.log(req.user);
+
       const { geocode } = req.body;
       const images = req.files || [];
 
       const description = await listingController.generateListingDescription(
         geocode,
         images,
+        req.user,
       );
 
       res.send(description);
