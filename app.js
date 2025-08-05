@@ -15,13 +15,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 // Enable CORS for all routes
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:5173",
-    ], // Add your React app's URL
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: true
   }),
 );
 
@@ -29,7 +23,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/documents", verifyToken, async (req, res) => {
+app.get("/healthcheck",  (req, res) => {
+  res.status(200).send({
+    status: "OK"
+  })
+})
+
+app.get("/get-document-by-userId", verifyToken, async (req, res) => {
   const result = await generatedListings.getDocumentsByUserId(req.user.user_id);
   res.status(200).json(result);
 });

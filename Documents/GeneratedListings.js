@@ -18,13 +18,15 @@ class GeneratedListings extends DocumentClass {
 
     const docs = this.getFullResponseArray(response);
 
-    return docs.map((doc) => ({
-      home_address: doc.home_address,
-      timestamp: doc.timestamp,
-      geocode: doc.geocode,
-      gpt_response: doc.gpt_response,
-      id: doc.id,
-    }));
+    return docs
+      .map((doc) => ({
+        home_address: doc.home_address,
+        timestamp: doc.timestamp.toDate(),
+        geocode: doc.geocode,
+        gpt_response: doc.gpt_response,
+        id: doc.id,
+      }))
+      .sort((a, b) => b.timestamp - a.timestamp);
   }
 }
 

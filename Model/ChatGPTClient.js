@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { prompt } from "./Prompt.js";
-const client = new OpenAI();
+const client = new OpenAI({});
 
 class ChatGPTClient {
   GPT_MODEL = "gpt-4.1-mini";
@@ -38,8 +38,6 @@ class ChatGPTClient {
         },
       ],
     });
-
-    console.log(response);
 
     return response;
   }

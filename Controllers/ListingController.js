@@ -39,6 +39,7 @@ class ListingController {
     for (const image of images) {
       const optimizedBuffer = await this.optimizeImage(image.buffer);
       const base64String = optimizedBuffer.toString("base64");
+      console.log(base64String.length);
       base64Images.push(base64String);
     }
 
