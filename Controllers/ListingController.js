@@ -32,21 +32,23 @@ class ListingController {
     }
   }
 
-  async generateListingDescription(geocode, images, user) {
+  async generateListingDescription(geocode, images, user, mode, focus) {
     const propertyData = await montanaCadastral.getPropertyData(geocode);
 
     const base64Images = [];
     for (const image of images) {
       const optimizedBuffer = await this.optimizeImage(image.buffer);
       const base64String = optimizedBuffer.toString("base64");
-      console.log(base64String.length);
       base64Images.push(base64String);
     }
 
     const gptResponse = await chatGPTClient.queryChatGPTClient(
       propertyData,
       base64Images,
+      mode,
+      focus,
     );
+
     await this.logGeneratedDescription(propertyData, gptResponse, user);
     return gptResponse.output_text;
   }
