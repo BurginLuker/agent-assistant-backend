@@ -13,7 +13,7 @@ const client = new OpenAI({
 });
 
 class ChatGPTClient {
-  GPT_MODEL = "gpt-4.1";
+  GPT_MODEL = "gpt-4.1-mini";
   MAX_LISTING_OUTPUT_TOKENS = 250;
   MAX_INSTAGRAM_TOKENS = 500;
 

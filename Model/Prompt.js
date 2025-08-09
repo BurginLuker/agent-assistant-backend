@@ -9,6 +9,7 @@ COMPLIANCE REQUIREMENTS:
 
 YOUR TASK:
 Write a natural, appealing listing description that attracts potential homebuyers. The description should be:
+- Always include the address
 - Professional yet friendly and inviting
 - Focused on key features, benefits, and selling points
 - Concise but compelling (aim for 150-250 words)
@@ -36,6 +37,7 @@ EXAMPLE FORMAT:
 [Special features and amenities that set it apart]
 [Location advantages and community benefits]
 [Closing statement that encourages action]
+[Make sure you response matches the 250 token limit]
 
 Remember: Every claim must be justifiable from the provided property data or visible in the images. Stay factual, compliant, and compelling.
 `;
@@ -51,6 +53,7 @@ COMPLIANCE REQUIREMENTS:
 
 YOUR TASK:
 Create an Instagram post that generates interest and engagement for the property. The content should be:
+- Always include the address
 - Eye-catching and scroll-stopping
 - Optimized for mobile viewing
 - Designed to encourage saves, shares, and comments
@@ -66,7 +69,7 @@ FORMAT REQUIREMENTS:
 - Keep text concise (Instagram users skim quickly)
 - Use line breaks for easy reading
 - Include relevant emojis (but don't overuse)
-- Add 5-8 strategic hashtags
+- Add 5-8 relevant, trending, strategic hashtags
 - End with engagement prompt (question or CTA)
 
 TONE GUIDELINES:
@@ -94,20 +97,15 @@ Remember: Make it shareable, save-worthy, and conversation-starting while mainta
 
 export const dataFocus = `
 FOCUS MODE: DATA-DRIVEN  
-- Lead with hard facts: square footage, room counts, lot size, year built, etc.
-- Emphasize practical benefits and property specifications
-- Use images to support and verify the data points mentioned
-- Highlight investment potential, functionality, and measurable value
-- Focus on what makes this property a smart purchase decision
-- Appeal to logical buyers who prioritize specs over aesthetics
-- Perfect for investment properties, fixer-uppers, or when data tells a compelling story`;
+- Prioritize hard facts (sq ft, rooms, lot size, year built).  
+- Emphasize practical benefits and measurable value.  
+- Use images only to confirm data points.  
+- Target logical buyers focused on specs, investment potential, or fixer-uppers.  
+- Avoid emotional or aesthetic language beyond what's factual.`;
 
 export const imageFocus = `
-FOCUS MODE: IMAGE-DRIVEN
-- Lead with visual appeal and what buyers can see in the photos
-- Describe the property's aesthetic, condition, and visual features prominently
-- Use the images to paint a picture of the lifestyle and experience
-- Reference specific visual elements (lighting, finishes, layout, outdoor spaces)
-- Support visual descriptions with relevant data points
-- Create emotional connection through what's visible
-- Perfect for properties with stunning visuals, unique design, or move-in ready condition`;
+FOCUS MODE: IMAGE-DRIVEN  
+- Lead with visual features from photos (lighting, finishes, layout, outdoor spaces).  
+- Describe condition and style vividly, supported by facts.  
+- Create emotional connection through visuals and lifestyle depiction.  
+- Target buyers attracted to move-in ready or uniquely designed homes.`;
