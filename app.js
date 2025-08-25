@@ -13,23 +13,19 @@ import listingController from "./Controllers/ListingController.js";
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Enable CORS for all routes
-app.use(
-  cors({
-    origin: true,
-  }),
-);
+app.use(cors());
 
 // Parse JSON bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/healthcheck", (req, res) => {
+app.get("/api/healthcheck", (req, res) => {
   res.status(200).send({
     status: "OK",
   });
 });
 
-app.get("/get-document-by-userId", verifyToken, async (req, res) => {
+app.get("/api/get-document-by-userId", verifyToken, async (req, res) => {
   if (req.user.user_id === "USER_NOT_FOUND") {
     res.status(400).json({
       error: "Permission Denied",
@@ -42,25 +38,30 @@ app.get("/get-document-by-userId", verifyToken, async (req, res) => {
 });
 
 // Add the generate endpoint that your React app is calling
-app.post("/generate", getUser, upload.array("images", 5), async (req, res) => {
-  try {
-    const { geocode, mode, focus } = req.body;
-    const images = req.files || [];
+app.post(
+  "/api/generate",
+  getUser,
+  upload.array("images", 5),
+  async (req, res) => {
+    try {
+      const { geocode, mode, focus } = req.body;
+      const images = req.files || [];
 
-    const description = await listingController.generateListingDescription(
-      geocode,
-      images,
-      req.user,
-      mode,
-      focus,
-    );
+      const description = await listingController.generateListingDescription(
+        geocode,
+        images,
+        req.user,
+        mode,
+        focus,
+      );
 
-    res.send(description);
-  } catch (error) {
-    console.error("Error processing request:", error);
-    res.status(500).send(error.message);
-  }
-});
+      res.send(description);
+    } catch (error) {
+      console.error("Error processing request:", error);
+      res.status(500).send(error.message);
+    }
+  },
+);
 
 app.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
