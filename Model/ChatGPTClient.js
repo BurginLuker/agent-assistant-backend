@@ -6,11 +6,12 @@ import {
   dataFocus,
 } from "./Prompt.js";
 
-//const functions = require('firebase-functions');
+
+
 const client = new OpenAI({
-  apiKey:
-    "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
+
 
 class ChatGPTClient {
   GPT_MODEL = "gpt-4.1-mini";
