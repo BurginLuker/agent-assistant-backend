@@ -32,7 +32,14 @@ class ListingController {
     }
   }
 
-  async generateListingDescription(geocode, images, user, mode, focus) {
+  async generateListingDescription(
+    geocode,
+    images,
+    user,
+    mode,
+    focus,
+    searchZillowForMoreInfo
+  ) {
     const propertyData = await montanaCadastral.getPropertyData(geocode);
 
     const base64Images = [];
@@ -47,6 +54,7 @@ class ListingController {
       base64Images,
       mode,
       focus,
+      searchZillowForMoreInfo
     );
 
     await this.logGeneratedDescription(propertyData, gptResponse, user);

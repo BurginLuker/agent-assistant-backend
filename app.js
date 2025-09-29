@@ -44,7 +44,7 @@ app.post(
   upload.array("images", 5),
   async (req, res) => {
     try {
-      const { geocode, mode, focus } = req.body;
+      const { geocode, mode, focus, zillow } = req.body;
       const images = req.files || [];
 
       const description = await listingController.generateListingDescription(
@@ -53,6 +53,7 @@ app.post(
         req.user,
         mode,
         focus,
+        zillow === "true"
       );
 
       res.send(description);
@@ -60,7 +61,7 @@ app.post(
       console.error("Error processing request:", error);
       res.status(500).send(error.message);
     }
-  },
+  }
 );
 
 app.listen(port, () => {

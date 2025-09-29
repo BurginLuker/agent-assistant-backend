@@ -21,7 +21,6 @@ STRUCTURE YOUR RESPONSE:
 3. Key property details (square footage, bedrooms, bathrooms, etc.)
 4. Notable features and amenities
 5. Location benefits and neighborhood highlights
-6. Closing call-to-action or invitation
 
 TONE GUIDELINES:
 - Use active, engaging language
@@ -37,7 +36,6 @@ EXAMPLE FORMAT:
 [Special features and amenities that set it apart]
 [Location advantages and community benefits]
 [Closing statement that encourages action]
-[Make sure you response matches the 250 token limit]
 
 Remember: Every claim must be justifiable from the provided property data or visible in the images. Stay factual, compliant, and compelling.
 `;
@@ -89,6 +87,9 @@ EXAMPLE STRUCTURE:
 [Lifestyle benefit or emotional connection]
 
 [Engagement question or call-to-action]
+
+Listed By: [Listing Agent] with [Agent Brokerage]
+[MLS #] [# 123456]
 
 #[RelevantHashtags] #[LocationHashtags] #[PropertyTypeHashtags]
 
