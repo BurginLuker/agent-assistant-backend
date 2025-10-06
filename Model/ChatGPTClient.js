@@ -79,45 +79,38 @@ class ChatGPTClient {
       max = this.MAX_INSTAGRAM_TOKENS;
     }
 
-    // Append optional focus instructions for the model.
-    if (focus === "images") {
-      prompt += imageFocus;
-    } else if (focus === "data") {
-      prompt += dataFocus;
-    }
+    // Add focus modifier
+    if (focus === "images") prompt += imageFocus;
+    else if (focus === "data") prompt += dataFocus;
 
-    let listingInfo;
-    if (searchZillowForMoreInfo) {
-      listingInfo = await this.getMlsNumberAndAgent(data);
-    }
-
-    let input = [];
-    if (listingInfo && searchZillowForMoreInfo) {
-      input.push({
-        role: "developer",
-        content: [
-          { type: "input_text", text: `${JSON.stringify(listingInfo)}` },
-        ],
-      });
-    }
-
-    const response = await client.responses.create({
+    // Prepare both async tasks
+    const chatPromise = client.responses.create({
       model: this.GPT_MODEL,
       max_output_tokens: max,
-      input: input.concat([
-        {
-          role: "developer",
-          content: prompt,
-        },
-        {
-          role: "user",
-          content: this.getContentArray(data, base64Images),
-        },
-      ]),
+      input: [
+        { role: "developer", content: prompt },
+        { role: "user", content: this.getContentArray(data, base64Images) },
+      ],
     });
-    console.log("CONTENT");
-    console.log(response); // Track token consumption for observability.
 
+    const listingPromise = searchZillowForMoreInfo
+      ? this.getMlsNumberAndAgent(data)
+      : Promise.resolve(null);
+
+    // Run both concurrently
+    const [response, listingInfo] = await Promise.all([
+      chatPromise,
+      listingPromise,
+    ]);
+
+    console.log("first", response.output_text);
+
+    if (listingInfo && listingInfo.listed_by) {
+      response.output_text += `\n \n Listed By ${listingInfo.listed_by} \n MLS #: ${listingInfo.mls_number}`;
+    }
+
+    console.log("CONTENT");
+    console.log(response);
     return response;
   }
 
@@ -130,7 +123,7 @@ class ChatGPTClient {
       });
 
       const zillowInfo = await client.responses.parse({
-        model: "gpt-5-mini",
+        model: "gpt-5-nano",
         tools: [{ type: "web_search" }],
         input: [
           {

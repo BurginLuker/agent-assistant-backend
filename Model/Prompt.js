@@ -88,9 +88,6 @@ EXAMPLE STRUCTURE:
 
 [Engagement question or call-to-action]
 
-Listed By: [Listing Agent] with [Agent Brokerage]
-[MLS #] [# 123456]
-
 #[RelevantHashtags] #[LocationHashtags] #[PropertyTypeHashtags]
 
 Remember: Make it shareable, save-worthy, and conversation-starting while maintaining professional standards and legal compliance.
