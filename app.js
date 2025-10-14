@@ -11,6 +11,7 @@ const port = 8080; // You can choose any available port
 import listingController from "./Controllers/ListingController.js";
 import propertyController from "./contollers/propertyController.js";
 import contentController from "./contollers/contentController.js";
+import feedbackController from "./contollers/feedbackController.js";
 
 // Configure multer for handling file uploads
 const upload = multer({ storage: multer.memoryStorage() });
@@ -70,6 +71,7 @@ app.post(
 
 app.use("/api/property", propertyController);
 app.use("/api/content", contentController);
+app.use("/api/feedback", feedbackController);
 
 app.listen(port, (error) => {
   console.log(`Express app listening at http://localhost:${port}`);

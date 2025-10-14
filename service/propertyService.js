@@ -68,11 +68,11 @@ class PropertyService {
       for (const file of property.PropertyFiles) {
         const { data: signedUrl, error } = await supabase.storage
           .from(process.env.SUPABASE_BUCKET)
-          .createSignedUrl(file.full_path, 86400); // 24 hours
+          .getPublicUrl(file.full_path);
         if (error) {
           throw error;
         }
-        images.push(signedUrl.signedUrl);
+        images.push(signedUrl.publicUrl);
       }
       properties.push({
         id: property.id,
