@@ -12,7 +12,7 @@ const client = new OpenAI({
 });
 
 class GptClient {
-  model = "gpt-4.1-nano";
+  model = "gpt-4.1-mini";
   max = 500;
 
   getSystemPrompt(type) {

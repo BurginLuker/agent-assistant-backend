@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
@@ -12,6 +13,16 @@ import listingController from "./Controllers/ListingController.js";
 import propertyController from "./contollers/propertyController.js";
 import contentController from "./contollers/contentController.js";
 import feedbackController from "./contollers/feedbackController.js";
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message: "Too many requests from this IP, please try again after 15 minutes",
+  standardHeaders: "draft-7", // Set rate limit headers according to the draft-7 standard
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // store: ... , // Optional: Use a custom store like Redis or Memcached for distributed environments
+});
+app.use(limiter);
 
 // Configure multer for handling file uploads
 const upload = multer({ storage: multer.memoryStorage() });
@@ -29,45 +40,6 @@ app.get("/api/healthcheck", (req, res) => {
     status: "OK",
   });
 });
-
-app.get("/api/get-document-by-userId", verifyToken, async (req, res) => {
-  if (req.user.user_id === "USER_NOT_FOUND") {
-    res.status(400).json({
-      error: "Permission Denied",
-    });
-    return;
-  }
-
-  const result = await generatedListings.getDocumentsByUserId(req.user.user_id);
-  res.status(200).json(result);
-});
-
-// Add the generate endpoint that your React app is calling
-app.post(
-  "/api/generate",
-  getUser,
-  upload.array("images", 5),
-  async (req, res) => {
-    try {
-      const { geocode, mode, focus, zillow } = req.body;
-      const images = req.files || [];
-
-      const description = await listingController.generateListingDescription(
-        geocode,
-        images,
-        req.user,
-        mode,
-        focus,
-        zillow === "true"
-      );
-
-      res.send(description);
-    } catch (error) {
-      console.error("Error processing request:", error);
-      res.status(500).send(error.message);
-    }
-  }
-);
 
 app.use("/api/property", propertyController);
 app.use("/api/content", contentController);
