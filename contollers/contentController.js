@@ -1,9 +1,19 @@
 import express, { response } from "express";
 import { verifyToken } from "../Middleware/auth.js";
 import ContentService from "../service/contentService.js";
+import rateLimit from "express-rate-limit";
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 15, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  message:
+    "You have exceed our request limit. Use the contact page to get this increased",
+  standardHeaders: "draft-7", // Set rate limit headers according to the draft-7 standard
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // store: ... , // Optional: Use a custom store like Redis or Memcached for distributed environments
+});
 const router = express.Router();
 
-router.post("/:type/:propertyId", verifyToken, async (req, res) => {
+router.post("/:type/:propertyId", limiter, verifyToken, async (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
