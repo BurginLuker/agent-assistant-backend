@@ -172,31 +172,33 @@ You are a licensed real estate professional writing an MLS listing description.
 
 COMPLIANCE REQUIREMENTS:
 - Must comply with all MLS and fair housing guidelines
-- Avoid subjective claims, discriminatory language, or unverifiable statements
+- Avoid discriminatory language, or unverifiable statements
 - Include only factual, property-related information
 
 YOUR TASK:
-Write a concise, professional MLS description highlighting the home’s key selling points. The description should:
+Write a professional MLS description highlighting the home’s key selling points. The description should:
 - Begin with a strong lead sentence summarizing the home
-- Include address, sq ft, bedrooms, bathrooms, lot size, and year built
+- If the property is over 1 acre, include the lot size in acres.
+- Detail the number of bedrooms, bathrooms, and total square footage by casually working them into the description
 - Highlight upgrades, recent renovations, or notable materials
 - Focus on layout, condition, and functionality
-- Mention community amenities or nearby attractions (factually)
-- Avoid fluff, emojis, or exaggeration
+- Avoid emojis or exaggeration
+- Be friendly and practical to emphasize the homes utility and appeal to serious buyers
 
 FORMAT REQUIREMENTS:
 - Professional, informative tone
 - Use full sentences and clear structure
-- Keep between 80–150 words
+- Use up to 250 words
 - No hashtags, emojis, or marketing clichés
 
 TONE GUIDELINES:
 - Objective yet compelling
 - Professional and data-driven
+- Encouraging and friendly towards potential buyers
 - Avoid redundancy or filler words
 
 EXAMPLE STRUCTURE:
-Beautifully maintained 3-bedroom, 2-bath home featuring an open-concept living area, updated kitchen with stainless steel appliances, and spacious backyard ideal for entertaining. Built in 2015, this 2,100 sq ft property offers modern comfort in a quiet neighborhood near local parks and schools. Move-in ready and meticulously cared for—schedule your showing today.
+Escape to this enchanting home tucked in the mountains of Clancy, MT. With over 3,000 sq.ft. of space, there is a room for everything you need. Not only does this 4 bed/3 bath home have the interior space, but it also sits on just over 1.6 acres of land with a fenced backyard. In the summer, enjoy green grass, various tree species, breathtaking flowers, and the iconic granite outcroppings of the area.  With a 2-car attached garage and room to add a shop, it’s an outdoorsman’s dream. Not to mention a front and back deck that have been updated over time so you can enjoy the sunrise and sunset. This meticulously maintained home in Forest Park Estates is within the highly respected Clancy School District. There is community water for $70 a month and well plowed county roads in the winter. 
 `;
 
 export const openHousePrompt = `
@@ -215,7 +217,7 @@ Write a short social post or text announcement for an upcoming open house. The c
 - Include a clear call-to-action
 
 FORMAT REQUIREMENTS:
-- Keep under 100 words
+- Keep under 200 words
 - Include emojis sparingly
 - End with an invitation (e.g., “See you there!”)
 - Optionally include hashtags for visibility
@@ -233,7 +235,7 @@ EXAMPLE STRUCTURE:
 ✨ [Feature 1]  
 ✨ [Feature 2]  
 
-Come tour this beautiful home and imagine your next chapter here.  
+[invitation to come tour the the home].  
 See you there!  
 #[OpenHouse] #[YourCityHomes]
 `;
