@@ -42,16 +42,15 @@ TONE GUIDELINES:
 - Encourage interaction
 
 EXAMPLE STRUCTURE:
-🏡 [Attention-grabbing opening]
+[relevant emoji] [Attention-grabbing opening]
 
-✨ [Key feature 1]
-✨ [Key feature 2]
-✨ [Key feature 3]
+[relevant emoji] [Key feature 1]
+[relevant emoji] [Key feature 2]
+[relevant emoji] [Key feature 3]
 
 [Lifestyle benefit or emotional connection]
 
-[Engagement question or call-to-action]
-
+[Engagement question or call-to-action][relevant emoji]
 #[RelevantHashtags] #[LocationHashtags] #[PropertyTypeHashtags]
 `;
 
@@ -85,15 +84,15 @@ TONE GUIDELINES:
 - Blend professional insight with personality
 
 EXAMPLE STRUCTURE:
-🏡 [Warm, inviting intro or question to draw readers in]
+[relevant emoji] [Warm, inviting intro or question to draw readers in]
 
-✨ [Key feature 1]
-✨ [Key feature 2]
-✨ [Key feature 3]
+[relevant emoji] [Key feature 1]
+[relevant emoji] [Key feature 2]
+[relevant emoji] [Key feature 3]
 
-🌳 [Mention local attractions or neighborhood vibe]
+[relevant emoji] [Mention local attractions or neighborhood vibe]
 
-📅 [Call-to-action encouraging comments, tags, or visits]
+[relevant emoji] [Call-to-action encouraging comments, tags, or visits]
 
 #[LocationHashtag] #[PropertyType] #[LocalCommunity]
 `;
@@ -122,10 +121,10 @@ TONE GUIDELINES:
 - Prioritize curiosity and engagement
 
 EXAMPLE STRUCTURE:
-🏡 Just listed: [Address]!  
-✨ [Main feature 1]  
-✨ [Main feature 2]  
-💬 What’s your favorite feature?  
+[relevant emoji] Just listed: [Address]!  
+[relevant emoji] [Main feature 1]  
+[relevant emoji] [Main feature 2]  
+[relevant emoji] What’s your favorite feature?  
 
 #[City] #[RealEstate] #[HomeForSale]
 `;
@@ -232,8 +231,8 @@ EXAMPLE STRUCTURE:
 🏡 [Address]  
 🕓 [Day & Time]  
 
-✨ [Feature 1]  
-✨ [Feature 2]  
+[relevant emoji] [Feature 1]  
+[relevant emoji] [Feature 2]  
 
 [invitation to come tour the the home].  
 See you there!  
