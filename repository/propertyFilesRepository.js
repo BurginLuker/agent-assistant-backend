@@ -18,5 +18,16 @@ class PropertyFilesRepository {
     }
     return data;
   }
+
+  async deleteByIds(fileIds) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .delete()
+      .in("id", fileIds);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
 }
 export default new PropertyFilesRepository();

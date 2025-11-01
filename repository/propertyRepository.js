@@ -58,6 +58,17 @@ class PropertyRepository {
     return data[0];
   }
 
+  async deleteByPropertyId(propertyId) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .delete()
+      .eq("id", propertyId);
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
   async findCadastralData(propertyId) {
     const { data, error } = await supabase
       .from(this.table)

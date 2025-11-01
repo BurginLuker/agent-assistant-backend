@@ -4,6 +4,8 @@ import MontanaCadastral from "../utils/montanaCadastral/montanaCadastral.js";
 import PropertyRepository from "../repository/propertyRepository.js";
 import propertyFilesRepository from "../repository/propertyFilesRepository.js";
 import propertyRepository from "../repository/propertyRepository.js";
+import contentRepository from "../repository/contentRepository.js";
+import SupabaseStorage from "../utils/storage/supabaseStorage.js";
 
 class PropertyService {
   async uploadImages(images) {
@@ -85,6 +87,12 @@ class PropertyService {
     return properties;
   }
 
+  /**
+   * Throw an error if the property does not belong to the user
+   * No hacker cunts around here
+   * @param {*} user
+   * @param {*} propertyId
+   */
   async propertyBelongsToUser(user, propertyId) {
     const property = await propertyRepository.findPropertyId(propertyId, user);
     if (!property) {
@@ -95,6 +103,30 @@ class PropertyService {
   async findPropertyById(user, propertyId) {
     await this.propertyBelongsToUser(user, propertyId);
     return await propertyRepository.findPropertyById(propertyId);
+  }
+
+  async deletePropertyById(user, propertyId) {
+    // Verify that this is the users property
+    await this.propertyBelongsToUser(user, propertyId);
+
+    const allPropertyContent =
+      await contentRepository.findContentByPropertyId(propertyId);
+    const allContentIds = allPropertyContent.map((c) => c.id);
+
+    const allPropertyFiles =
+      await propertyFilesRepository.findByPropertyId(propertyId);
+
+    // Two loops, idgaf, keep it readble on god
+    const fileIds = allPropertyFiles.map((f) => f.id);
+    const filePaths = allPropertyFiles.map((f) => f.full_path);
+
+    const contentPromise = contentRepository.deleteContentByIds(allContentIds);
+    const filesPromise = propertyFilesRepository.deleteByIds(fileIds);
+    const storagePromise = SupabaseStorage.deleteFiles(filePaths);
+
+    // Need all these to resolve because of foreign key constaints
+    await Promise.all([contentPromise, filesPromise, storagePromise]);
+    return await propertyRepository.deleteByPropertyId(propertyId);
   }
 }
 

@@ -22,9 +22,20 @@ class ContentRepository {
   async findContentByPropertyId(property_id) {
     const { data, error } = await supabase
       .from(this.table)
-      .select("content, type, created_at")
+      .select("content, type, created_at, id")
       .eq("property_id", property_id)
       .order("created_at", { ascending: false });
+    if (error) {
+      throw error;
+    }
+    return data;
+  }
+
+  async deleteContentByIds(contentIds) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .delete()
+      .in("id", contentIds);
     if (error) {
       throw error;
     }

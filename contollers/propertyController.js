@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 import PropertyService from "../service/propertyService.js";
 import { verifyToken } from "../Middleware/auth.js";
-import { Images } from "openai/resources/images.js";
+import { handleError } from "../utils/utils.js";
 const router = express.Router();
 
 // Configure multer
@@ -71,6 +71,19 @@ router.get("/:propertyId", verifyToken, async (req, res) => {
       error: "Failed to get properties",
       details: error.message,
     });
+  }
+});
+
+router.delete("/:propertyId", verifyToken, async (req, res) => {
+  try {
+    res.status(200).json({
+      property: await PropertyService.deletePropertyById(
+        req.user,
+        req.params.propertyId
+      ),
+    });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 
