@@ -34,7 +34,8 @@ class PropertyService {
     if (!geocode || images.length === 0) {
       throw new Error("Must have geocode and files");
     }
-    const cadastralData = await MontanaCadastral.getPropertyData(geocode);
+    const { summaryJson: cadastralData } =
+      await MontanaCadastral.getPropertyData(geocode);
     const address =
       cadastralData.situsAddressLine1 ||
       "NO_ADDRESS" + cadastralData.situsCityStateZip;

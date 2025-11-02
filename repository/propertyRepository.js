@@ -21,7 +21,7 @@ class PropertyRepository {
   async findPropertyId(property_id, user) {
     const { data, error } = await supabase
       .from(this.table)
-      .select("id")
+      .select("id, geocode")
       .eq("id", property_id, "user_id", user.user_id);
     return data;
   }

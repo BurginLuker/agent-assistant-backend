@@ -5,6 +5,7 @@ import propertyService from "./propertyService.js";
 import propertyFilesRepository from "../repository/propertyFilesRepository.js";
 import supabase from "../utils/supabaseClient.js";
 import sharp from "sharp";
+import montanaCadastral from "../utils/montanaCadastral/montanaCadastral.js";
 
 class ContentService {
   async optimizeImage(buffer) {
@@ -40,22 +41,34 @@ class ContentService {
 
   async create(user, type, propertyId, res) {
     await propertyService.propertyBelongsToUser(user, propertyId);
-    const cadastralData =
-      await propertyRepository.findCadastralData(propertyId);
+
+    // Get the geocode which will be used to snag data from montana cadastral api
+    const { geocode } = await propertyRepository.findPropertyById(
+      propertyId,
+      user
+    );
+
+    // String version of useful property data
+    const propertyData = await montanaCadastral.getPropertyDataForGPT(
+      geocode,
+      type
+    );
 
     const propertyPhotos =
       await propertyFilesRepository.findByPropertyId(propertyId);
     const optimizedImages = await this.getImageBuffers(propertyPhotos);
 
+    // Begin streaming of the gpt response
     const response = await gptClient.query(
       res,
       type,
-      JSON.stringify(cadastralData),
+      propertyData,
       optimizedImages
     );
+
+    // Save the output data and its token usage
     const inputTokens = response.usage.input_tokens;
     const outputTokens = response.usage.output_tokens;
-
     const content = await contentRepository.create(
       propertyId,
       response.content,

@@ -179,15 +179,16 @@ Write a professional MLS description highlighting the home’s key selling point
 - Begin with a strong lead sentence summarizing the home
 - If the property is over 1 acre, include the lot size in acres.
 - Detail the number of bedrooms, bathrooms, and total square footage by casually working them into the description
-- Highlight upgrades, recent renovations, or notable materials
 - Focus on layout, condition, and functionality
 - Avoid emojis or exaggeration
 - Be friendly and practical to emphasize the homes utility and appeal to serious buyers
+- Be honest in the assessment of the house, include a positive spin. But do not upsell downsides of the property, downsides can be mentioned
+- Remember this will be read by other humans who do not want to be lied to about the condition of a house
 
 FORMAT REQUIREMENTS:
 - Professional, informative tone
 - Use full sentences and clear structure
-- Use up to 250 words
+- Do not use more than 300 words
 - No hashtags, emojis, or marketing clichés
 
 TONE GUIDELINES:
