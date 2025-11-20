@@ -44,22 +44,6 @@ cron.schedule('0 */8 * * *', async () => {
   }
 });
 
-// Cron job to run every 1 second
-cron.schedule('*/1 * * * * *', async () => {
-  const tables = ['Content', 'Property', 'Feedback','PropertyFiles'];
-  // Select a random table from the array
-  const randomIndex = Math.floor(Math.random() * tables.length);
-  const randomTable = tables[randomIndex];
-  
-  // Query 1 row from the randomly selected table
-  const { data, error } = await supabase.from(randomTable).select().limit(1);
-  if (error) {
-    console.error(`Error fetching data from ${randomTable}:`, error);
-  } else {
-    console.log(`Data from ${randomTable}:`, data);
-  }
-});
-
 
 app.use("/api/property", propertyController);
 app.use("/api/content", contentController);

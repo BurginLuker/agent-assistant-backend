@@ -59,7 +59,7 @@ class GptClient {
           content: [
             {
               type: "input_text",
-              text: `Here is the the housing data: ${cadastralData}`,
+              text: `Data for the house the user is making content for: ${cadastralData}`,
             },
           ].concat(imageBlock),
         },
