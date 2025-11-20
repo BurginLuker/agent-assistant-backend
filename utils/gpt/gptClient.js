@@ -12,7 +12,7 @@ const client = new OpenAI({
 });
 
 class GptClient {
-  model = "gpt-4.1-mini";
+  model = "gpt-5.1";
   max = 500;
 
   getSystemPrompt(type) {
@@ -64,6 +64,9 @@ class GptClient {
           ].concat(imageBlock),
         },
       ],
+      reasoning: {
+        effort: "none",
+      },
       stream: true,
     });
 
