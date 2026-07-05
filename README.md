@@ -10,7 +10,7 @@ The backend service for Agent Assistant, a real estate AI tool that helps agents
 
 Real estate agents upload photos of a property along with its geocode. The backend:
 
-1. Fetches structured property data (address, acreage, bedrooms, bathrooms, sqft) from the [Montana Cadastral API](https://svc.mt.gov/msl/cadastralapi/)
+1. Fetches structured property data (address, acreage, bedrooms, bathrooms, sqft) from the Montana Cadestral
 2. Optimizes uploaded images and stores them in Supabase Storage
 3. Passes the property data and images to OpenAI's vision model
 4. Streams AI-generated marketing copy back to the client in real time
