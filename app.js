@@ -3,7 +3,6 @@ import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 import { getUser, verifyToken } from "./Middleware/auth.js";
-import generatedListings from "./Documents/GeneratedListings.js";
 import cron from 'node-cron';
 
 const app = express();
