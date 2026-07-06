@@ -1,5 +1,6 @@
 import admin from "firebase-admin";
 
+// pull from env
 admin.initializeApp({
   credential: admin.credential.cert({
     type: "service_account",
